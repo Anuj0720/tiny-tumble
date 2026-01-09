@@ -1,11 +1,10 @@
-import { OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Experience } from "./components/Experience";
 
 export default function App(){
   return <>
-    <OrbitControls />
-    <mesh>
-      <boxGeometry />
-      <meshNormalMaterial />
-    </mesh>
+    <Canvas>
+      <Experience />
+    </Canvas>
   </>
 }
