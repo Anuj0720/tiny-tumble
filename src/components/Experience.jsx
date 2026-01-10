@@ -7,7 +7,7 @@ export const Experience = () => {
     <>
       <Environment preset="sunset" />
      
-      <Physics debug>
+      <Physics>
         <RigidBody type="fixed">
           <mesh position-y={-0.251} rotation-y={Math.PI / 2} receiveShadow>
             <boxGeometry args={[20, 0.5, 20]} />
