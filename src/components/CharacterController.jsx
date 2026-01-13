@@ -1,7 +1,7 @@
 import { CapsuleCollider, RigidBody } from "@react-three/rapier";
 import { Character } from "./Character";
 import { useControls } from "leva";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
@@ -12,6 +12,7 @@ const normalizeAngle = (angle) => {
   while (angle < -Math.PI) angle += 2 * Math.PI;
   return angle;
 };
+
 const lerpAngle = (start, end, t) => {
   start = normalizeAngle(start);
   end = normalizeAngle(end);
@@ -24,13 +25,13 @@ const lerpAngle = (start, end, t) => {
   return start + (end - start) * t;
 };
 
-export const CharacterController = () => {
+export const CharacterController = ({ spawn, onLevelEnd }) => {
   const container = useRef();
   const cameraTarget = useRef();
   const cameraPosition = useRef();
-
   const character = useRef();
   const rb = useRef();
+
   const rotationTarget = useRef(0);
   const characterRotationTarget = useRef(0);
 
@@ -39,7 +40,7 @@ export const CharacterController = () => {
 
   const [animation, setAnimation] = useState("idle");
 
-  /*------------------------LEVA CONTROLS------------------------------*/
+  /* ---------------- LEVA CONTROLS ---------------- */
   const { radius, halfHeight, positionY } = useControls(
     "Character Collider Size",
     {
@@ -58,6 +59,7 @@ export const CharacterController = () => {
     },
     { collapsed: true }
   );
+
   const { cameraTargetZ } = useControls(
     "Camera Target",
     {
@@ -65,6 +67,7 @@ export const CharacterController = () => {
     },
     { collapsed: true }
   );
+
   const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED, JUMP_FORCE } = useControls(
     "Character Controls",
     {
@@ -82,7 +85,7 @@ export const CharacterController = () => {
 
   const [, get] = useKeyboardControls();
 
-  /*---------------------MOVEMNT--------------------------*/
+  /* ---------------- MOVEMENT ---------------- */
   useFrame(() => {
     if (!rb.current) return;
 
@@ -108,16 +111,23 @@ export const CharacterController = () => {
       vel.z =
         Math.cos(rotationTarget.current + characterRotationTarget.current) *
         speed;
+
       setAnimation(speed === RUN_SPEED ? "run" : "walk");
     } else {
       setAnimation("idle");
+      vel.x = 0;
+      vel.z = 0;
     }
 
-    /* -------- JUMP (COLLISION BASED) -------- */
+    /* -------- JUMP -------- */
     const jump = get().jump;
     const jumpPressed = jump && !prevJump.current;
 
-    if (jumpPressed && canJump.current) {
+    if (
+      jumpPressed &&
+      canJump.current &&
+      Math.abs(vel.y) < 0.05
+    ) {
       vel.y = JUMP_FORCE;
       canJump.current = false;
       setAnimation("jump_up");
@@ -134,7 +144,7 @@ export const CharacterController = () => {
     rb.current.setLinvel(vel, true);
   });
 
-  /*----------------3rd Person Camera---------------------*/
+  /* ---------------- CAMERA ---------------- */
   const cameraWorldPosition = useRef(new Vector3());
   const cameraLookAtWorldPosition = useRef(new Vector3());
   const cameraLookAt = useRef(new Vector3());
@@ -155,12 +165,32 @@ export const CharacterController = () => {
   });
 
   const respawn = () => {
-    rb.current.setTranslation({
-      x: 0,
-      y: 2,
-      z: 0,
-    });
+    if (!rb.current) return;
+
+    rb.current.setTranslation(
+      { x: spawn[0], y: spawn[1], z: spawn[2] },
+      true
+    );
+
+    rb.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
+    rb.current.setAngvel({ x: 0, y: 0, z: 0 }, true);
+
+    canJump.current = false;
   };
+
+  useEffect(() => {
+    if (!rb.current) return;
+
+    rb.current.setTranslation(
+      { x: spawn[0], y: spawn[1], z: spawn[2] },
+      true
+    );
+
+    rb.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
+    rb.current.setAngvel({ x: 0, y: 0, z: 0 }, true);
+
+    canJump.current = false;
+  }, [spawn]);
 
   return (
     <RigidBody
@@ -175,13 +205,11 @@ export const CharacterController = () => {
         }
       }}
       onIntersectionEnter={({ other }) => {
-        if (other.rigidBodyObject.name === "space") {
+        if (other.rigidBodyObject?.name === "space") {
           respawn();
         }
-      }}
-      onCollisionExit={({ other }) => {
-        if (other.rigidBodyObject?.name === "platform") {
-          canJump.current = false;
+        if (other.rigidBodyObject?.name === "end") {
+          onLevelEnd?.();
         }
       }}
     >

@@ -16,6 +16,8 @@ export function Character({animation, ...props}) {
     actions[animation]?.reset().fadeIn(0.24).play();
     return () => actions?.[animation]?.fadeOut(0.24);
   }, [animation]);
+
+  
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
