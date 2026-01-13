@@ -19,134 +19,134 @@ export function Level1(props) {
           position={[-1, 0, -47]}
         />
         <CuboidCollider args={[2, 2, 2]} position={[0, 1, -47]} />
-
-        
       </RigidBody>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.Start.geometry}
-        material={materials["platformer.053"]}
-        position={[0, 0, -2.068]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.platform_6x6x1_blue002.geometry}
-        material={materials["platformer.053"]}
-        position={[0, 0, -8.068]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.platform_6x6x1_blue003.geometry}
-        material={materials["platformer.053"]}
-        position={[0, 0, -16]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.platform_6x6x1_blue004.geometry}
-        material={materials["platformer.053"]}
-        position={[0, 0, -22]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.platform_2x2x1_blue002.geometry}
-        material={materials["platformer.041"]}
-        position={[2, 0, -27]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.platform_2x2x1_blue003.geometry}
-        material={materials["platformer.041"]}
-        position={[-2, 0, -27]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.platform_6x6x1_blue005.geometry}
-        material={materials["platformer.053"]}
-        position={[0, 0, -32]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.platform_6x6x1_blue006.geometry}
-        material={materials["platformer.053"]}
-        position={[0, 0, -42]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.platform_2x2x1_blue004.geometry}
-        material={materials["platformer.041"]}
-        position={[-2, 0, -37]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.star_blue.geometry}
-        material={materials["platformer.082"]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.signage_finish001.geometry}
-        material={materials["platformer.362"]}
-        position={[0, 1, -44]}
-      >
+
+      <RigidBody type="fixed" colliders="trimesh" name="platform">
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.signage_finish_board001.geometry}
-          material={materials["platformer.362"]}
-          position={[0, 4, 0]}
+          geometry={nodes.Start.geometry}
+          material={materials["platformer.053"]}
+          position={[0, 0, -2.068]}
         />
-      </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.flag_B_blue001.geometry}
-        material={materials["platformer.025"]}
-        position={[0, 1, -48]}
-        rotation={[0, 1.571, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.strut_vertical001.geometry}
-        material={materials["platformer.369"]}
-        position={[-2, 0.267, -13.016]}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.strut_vertical002.geometry}
-        material={materials["platformer.369"]}
-        position={[1.802, 0.267, -13.016]}
-        rotation={[Math.PI / 2, 0, 0]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.floor_wood_2x2001.geometry}
-        material={materials["platformer.348"]}
-        position={[2, 0, -52]}
-      />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.platform_6x6x1_blue002.geometry}
+          material={materials["platformer.053"]}
+          position={[0, 0, -8.068]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.platform_6x6x1_blue003.geometry}
+          material={materials["platformer.053"]}
+          position={[0, 0, -16]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.platform_6x6x1_blue004.geometry}
+          material={materials["platformer.053"]}
+          position={[0, 0, -22]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.platform_2x2x1_blue002.geometry}
+          material={materials["platformer.041"]}
+          position={[2, 0, -27]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.platform_2x2x1_blue003.geometry}
+          material={materials["platformer.041"]}
+          position={[-2, 0, -27]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.platform_6x6x1_blue005.geometry}
+          material={materials["platformer.053"]}
+          position={[0, 0, -32]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.platform_6x6x1_blue006.geometry}
+          material={materials["platformer.053"]}
+          position={[0, 0, -42]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.platform_2x2x1_blue004.geometry}
+          material={materials["platformer.041"]}
+          position={[-2, 0, -37]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.star_blue.geometry}
+          material={materials["platformer.082"]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.signage_finish001.geometry}
+          material={materials["platformer.362"]}
+          position={[0, 1, -44]}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.signage_finish_board001.geometry}
+            material={materials["platformer.362"]}
+            position={[0, 4, 0]}
+          />
+        </mesh>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.flag_B_blue001.geometry}
+          material={materials["platformer.025"]}
+          position={[0, 1, -48]}
+          rotation={[0, 1.571, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.strut_vertical001.geometry}
+          material={materials["platformer.369"]}
+          position={[-2, 0.267, -13.016]}
+          rotation={[Math.PI / 2, 0, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.strut_vertical002.geometry}
+          material={materials["platformer.369"]}
+          position={[1.802, 0.267, -13.016]}
+          rotation={[Math.PI / 2, 0, 0]}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.floor_wood_2x2001.geometry}
+          material={materials["platformer.348"]}
+          position={[2, 0, -52]}
+        />
 
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes.floor_wood_4x4002.geometry}
-        material={materials["platformer.350"]}
-        position={[-1, 0, -51]}
-      />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.floor_wood_4x4002.geometry}
+          material={materials["platformer.350"]}
+          position={[-1, 0, -51]}
+        />
 
-      <mesh
+        <mesh
           castShadow
           receiveShadow
           geometry={nodes.floor_wood_2x6001.geometry}
@@ -154,6 +154,7 @@ export function Level1(props) {
           position={[2, 0, -48]}
           rotation={[0, 1.571, 0]}
         />
+      </RigidBody>
     </group>
   );
 }

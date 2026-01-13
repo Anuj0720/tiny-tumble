@@ -20,6 +20,9 @@ export function Level2(props) {
         />
         <CuboidCollider args={[2, 2, 2]} position={[1, 1, -71.477]} />
       </RigidBody>
+
+      <RigidBody type="fixed" colliders="trimesh" name="platform">
+      
       <mesh
         castShadow
         receiveShadow
@@ -183,6 +186,7 @@ export function Level2(props) {
         position={[1, 5, -72]}
         rotation={[0, 1.571, 0]}
       />
+      </RigidBody>
     </group>
   );
 }

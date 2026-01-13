@@ -115,8 +115,8 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
       setAnimation(speed === RUN_SPEED ? "run" : "walk");
     } else {
       setAnimation("idle");
-      vel.x = 0;
-      vel.z = 0;
+      // vel.x = 0;
+      // vel.z = 0;
     }
 
     /* -------- JUMP -------- */
@@ -125,8 +125,8 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
 
     if (
       jumpPressed &&
-      canJump.current &&
-      Math.abs(vel.y) < 0.05
+      canJump.current
+      // &&Math.abs(vel.y) < 0.05
     ) {
       vel.y = JUMP_FORCE;
       canJump.current = false;
@@ -202,6 +202,11 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
       onCollisionEnter={({ other }) => {
         if (other.rigidBodyObject?.name === "platform") {
           canJump.current = true;
+        }
+      }}
+      onCollisionExit={({other}) =>{
+        if(other.rigidBodyObject.name === "platform"){
+          canJump.current = false
         }
       }}
       onIntersectionEnter={({ other }) => {

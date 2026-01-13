@@ -13,7 +13,7 @@ const LEVELS = [
 ];
 
 export const Experience = () => {
-  const [levelIndex, setLevelIndex] = useState(0);
+  const [levelIndex, setLevelIndex] = useState(2);
   const [gameFinished, setGameFinished] = useState(false);
 
   const { Component: Level } = LEVELS[levelIndex];
@@ -31,7 +31,7 @@ export const Experience = () => {
       <OrbitControls />
       <Environment preset="sunset" />
 
-      <Physics>
+      <Physics debug>
         {!gameFinished && (
           <>
             <CharacterController
@@ -39,9 +39,9 @@ export const Experience = () => {
               onLevelEnd={handleLevelEnd}
             />
 
-            <RigidBody type="fixed" colliders="trimesh" name="platform">
+            {/* <RigidBody type="fixed" colliders="trimesh" name="platform"> */}
               <Level position={[0, -0.5, 0]} rotation-y={Math.PI} />
-            </RigidBody>
+            {/* </RigidBody> */}
 
             {/* FALL / VOID SENSOR */}
             <RigidBody
