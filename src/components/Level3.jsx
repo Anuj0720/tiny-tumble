@@ -53,7 +53,7 @@ export function Level3(props) {
     <group {...props} dispose={null}>
       <RigidBody
         ref={platform}
-        type="kinematicVelocity" // ✅ IMPORTANT
+        type="kinematicVelocity"
         position={[0, -3.141, -8]}
         name="platform"
         colliders={"trimesh"}

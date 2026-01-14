@@ -4,16 +4,18 @@ import { CharacterController } from "./CharacterController";
 import { Level1 } from "./Level1";
 import { Level2 } from "./Level2";
 import { Level3 } from "./Level3";
+import { Level4 } from "./Level4";
 import { useState } from "react";
 
 const LEVELS = [
   { Component: Level1, spawn: [0, 2, 0] },
   { Component: Level2, spawn: [-12, 2, 0] },
   { Component: Level3, spawn: [0, 2, 0] },
+  { Component: Level4, spawn: [0, 2, 0] },
 ];
 
 export const Experience = () => {
-  const [levelIndex, setLevelIndex] = useState(2);
+  const [levelIndex, setLevelIndex] = useState(0);
   const [gameFinished, setGameFinished] = useState(false);
 
   const { Component: Level } = LEVELS[levelIndex];
@@ -30,8 +32,7 @@ export const Experience = () => {
     <>
       <OrbitControls />
       <Environment preset="sunset" />
-
-      <Physics debug>
+      <Physics>
         {!gameFinished && (
           <>
             <CharacterController
@@ -40,7 +41,7 @@ export const Experience = () => {
             />
 
             {/* <RigidBody type="fixed" colliders="trimesh" name="platform"> */}
-              <Level position={[0, -0.5, 0]} rotation-y={Math.PI} />
+            <Level position={[0, -0.5, 0]} rotation-y={Math.PI} />
             {/* </RigidBody> */}
 
             {/* FALL / VOID SENSOR */}
