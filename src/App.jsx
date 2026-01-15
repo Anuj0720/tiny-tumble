@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <Leva hidden />
+      <Leva hidden/>
 
       <Interface
         started={started}

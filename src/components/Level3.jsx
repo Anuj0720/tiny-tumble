@@ -11,15 +11,20 @@ export function Level3(props) {
   const { nodes, materials } = useGLTF("/models/level3.glb");
   const platform = useRef();
   const platformX = useRef();
+  const platformZ = useRef();
+  const directionZ = useRef(1);
   const directionX = useRef(1);
   const direction = useRef(1);
 
   const MIN_Y = -4.5;
   const MAX_Y = -2.0;
-  const SPEED = 1.2;
+  const SPEED = 1.5;
 
   const MIN_X = -2;
   const MAX_X = 10;
+
+  const MIN_Z = 115
+  const MAX_Z = 128
 
   useFrame(() => {
     // 1. Vertical Platform Logic (Existing)
@@ -45,6 +50,19 @@ export function Level3(props) {
       // Move along X axis
       platformX.current.setLinvel(
         { x: SPEED * directionX.current, y: 0, z: 0 },
+        true
+      );
+    }
+    if (platformZ.current) {
+      const z = platformZ.current.translation().z;
+
+      // Check boundaries
+      if (z >= MAX_Z) directionZ.current = -1;
+      if (z <= MIN_Z) directionZ.current = 1;
+
+      // Move along Z axis
+      platformZ.current.setLinvel(
+        { x: 0, y: 0, z: SPEED * directionZ.current },
         true
       );
     }
@@ -85,6 +103,24 @@ export function Level3(props) {
         />
       </RigidBody>
 
+      <RigidBody
+        ref={platformZ}
+        type="kinematicVelocity"
+        position={[-14, -1.141, -115]}
+        name="platform"
+        friction={1}
+        linearDamping={5}
+        colliders={"trimesh"}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.platform_4x4x1_green003.geometry}
+          material={materials["platformer.130"]}
+          // position={[-14, -1.141, -115]}
+        />
+      </RigidBody>
+
        <RigidBody type="fixed" collider={false} sensor name="end">
 
       <mesh
@@ -94,7 +130,7 @@ export function Level3(props) {
           material={materials["platformer.350"]}
           position={[-21, -1.141, -154]}
           />
-        <CuboidCollider args={[2, 2, 2]} position={[-21, -1.141, -154]} />
+        <CuboidCollider args={[2, 2, 2]} position={[-17, -1.141, -154]} />
           </RigidBody>
 
       <RigidBody type="fixed" colliders="trimesh" name="platform">
@@ -242,13 +278,7 @@ export function Level3(props) {
           material={materials["platformer.138"]}
           position={[-14, -4.141, -133]}
         />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.platform_4x4x1_green003.geometry}
-          material={materials["platformer.130"]}
-          position={[-14, -1.141, -115]}
-        />
+        
         <mesh
           castShadow
           receiveShadow
