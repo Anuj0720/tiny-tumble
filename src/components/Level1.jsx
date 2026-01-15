@@ -159,4 +159,4 @@ export function Level1(props) {
   );
 }
 
-useGLTF.preload("/tiny-tumble.glb");
+useGLTF.preload("/models/level1.glb");

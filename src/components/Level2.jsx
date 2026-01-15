@@ -191,4 +191,4 @@ export function Level2(props) {
   );
 }
 
-useGLTF.preload("/level2.glb");
+useGLTF.preload("/models/level2.glb");

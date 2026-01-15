@@ -288,4 +288,4 @@ export function Level4(props) {
   );
 }
 
-useGLTF.preload("/tiny-tumble.glb");
+useGLTF.preload("/models/level4.glb");

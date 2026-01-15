@@ -1,11 +1,15 @@
 import { Environment } from "@react-three/drei";
 import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
+import { useState } from "react";
+
 import { CharacterController } from "./CharacterController";
 import { Level1 } from "./Level1";
 import { Level2 } from "./Level2";
 import { Level3 } from "./Level3";
 import { Level4 } from "./Level4";
-import { useState } from "react";
+
+import { Clouds } from "./Cloud";
+import { SkyGradient } from "./SkyGradient";
 
 const LEVELS = [
   { Component: Level1, spawn: [0, 2, 0] },
@@ -25,24 +29,34 @@ export const Experience = ({ onGameFinished }) => {
       setLevelIndex((prev) => prev + 1);
     } else {
       setGameFinished(true);
-      onGameFinished?.(); 
+      onGameFinished?.();
     }
   };
 
   return (
     <>
+      <SkyGradient />
+
       <Environment preset="sunset" />
 
-      <Physics debug>
+      <Clouds />
+
+      {/*  ATMOSPHERIC FOG */}
+      <fog attach="fog" args={["#7d9ac9", 0.1, 50]} />
+
+      <Physics>
         {!gameFinished && (
           <>
+            {/* PLAYER */}
             <CharacterController
               spawn={LEVELS[levelIndex].spawn}
               onLevelEnd={handleLevelEnd}
             />
 
+            {/*  LEVEL */}
             <Level position={[0, -0.5, 0]} rotation-y={Math.PI} />
 
+            {/*  VOID / FALL SENSOR */}
             <RigidBody
               type="fixed"
               colliders={false}

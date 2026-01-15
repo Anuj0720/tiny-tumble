@@ -63,7 +63,7 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
   const { cameraTargetZ } = useControls(
     "Camera Target",
     {
-      cameraTargetZ: { value: 1.5, min: -10, max: 10 },
+      cameraTargetZ: { value: 6.5, min: -10, max: 10 },
     },
     { collapsed: true }
   );
