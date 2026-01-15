@@ -1,4 +1,4 @@
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
 import { CharacterController } from "./CharacterController";
 import { Level1 } from "./Level1";
@@ -14,7 +14,7 @@ const LEVELS = [
   { Component: Level4, spawn: [0, 2, 0] },
 ];
 
-export const Experience = () => {
+export const Experience = ({ onGameFinished }) => {
   const [levelIndex, setLevelIndex] = useState(0);
   const [gameFinished, setGameFinished] = useState(false);
 
@@ -25,14 +25,15 @@ export const Experience = () => {
       setLevelIndex((prev) => prev + 1);
     } else {
       setGameFinished(true);
+      onGameFinished?.(); 
     }
   };
 
   return (
     <>
-      <OrbitControls />
       <Environment preset="sunset" />
-      <Physics>
+
+      <Physics debug>
         {!gameFinished && (
           <>
             <CharacterController
@@ -40,11 +41,8 @@ export const Experience = () => {
               onLevelEnd={handleLevelEnd}
             />
 
-            {/* <RigidBody type="fixed" colliders="trimesh" name="platform"> */}
             <Level position={[0, -0.5, 0]} rotation-y={Math.PI} />
-            {/* </RigidBody> */}
 
-            {/* FALL / VOID SENSOR */}
             <RigidBody
               type="fixed"
               colliders={false}

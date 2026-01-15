@@ -72,14 +72,14 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
     "Character Controls",
     {
       WALK_SPEED: { value: 2, min: 0.1, max: 4, step: 0.1 },
-      RUN_SPEED: { value: 2.6, min: 0.2, max: 12, step: 0.1 },
+      RUN_SPEED: { value: 2.8, min: 0.2, max: 12, step: 0.1 },
       ROTATION_SPEED: {
-        value: degToRad(0.5),
+        value: degToRad(2),
         min: degToRad(0.1),
         max: degToRad(5),
         step: degToRad(0.1),
       },
-      JUMP_FORCE: { value: 6, min: 2, max: 12 },
+      JUMP_FORCE: { value: 6.5, min: 2, max: 12 },
     }
   );
 
