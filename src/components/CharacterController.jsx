@@ -6,6 +6,7 @@ import { Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
 import { degToRad, MathUtils } from "three/src/math/MathUtils.js";
+import { audio } from "../audio";
 
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
@@ -127,10 +128,14 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
       jumpPressed &&
       canJump.current
       // &&Math.abs(vel.y) < 0.05
+
     ) {
       vel.y = JUMP_FORCE;
       canJump.current = false;
       setAnimation("jump_up");
+      
+      audio.jump.currentTime = 0
+      audio.jump.play()
     }
 
     prevJump.current = jump;
@@ -204,11 +209,11 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
           canJump.current = true;
         }
       }}
-      onCollisionExit={({other}) =>{
-        if(other.rigidBodyObject.name === "platform"){
-          canJump.current = false
-        }
-      }}
+      // onCollisionExit={({other}) =>{
+      //   if(other.rigidBodyObject.name === "platform"){
+      //     canJump.current = false
+      //   }
+      // }}
       onIntersectionEnter={({ other }) => {
         if (other.rigidBodyObject?.name === "space") {
           respawn();

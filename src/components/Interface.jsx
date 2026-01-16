@@ -1,13 +1,9 @@
 import { useProgress } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import "./interface.css";
+import { audio } from "../audio";
 
-export const Interface = ({
-  started,
-  gameFinished,
-  onPlay,
-  onRestart,
-}) => {
+export const Interface = ({ started, gameFinished, onPlay, onRestart }) => {
   const { progress, active } = useProgress();
 
   const [displayProgress, setDisplayProgress] = useState(0);
@@ -39,10 +35,9 @@ export const Interface = ({
     return () => cancelAnimationFrame(raf.current);
   }, [progress, active]);
 
-  const loaded =
-    progress >= 100 && minTimePassed && displayProgress >= 100;
+  const loaded = progress >= 100 && minTimePassed && displayProgress >= 100;
 
-  // 🔑 DERIVED STATE (NO EFFECT, NO WARNING)
+  // DERIVED STATE (NO EFFECT, NO WARNING)
   const shouldExit = isExiting && !gameFinished;
 
   // Hide UI during gameplay
@@ -50,11 +45,17 @@ export const Interface = ({
 
   /* ---------------- HANDLERS ---------------- */
   const handlePlay = () => {
+    audio.click.currentTime = 0;
+    audio.bg.currentTime = 0;
+    audio.click.play();
+    audio.bg.play();
     setIsExiting(true);
     setTimeout(onPlay, 900);
   };
 
   const handleRestart = () => {
+    audio.click.currentTime = 0;
+    audio.click.play();
     setIsExiting(true);
     setTimeout(onRestart, 900);
   };
@@ -96,9 +97,7 @@ export const Interface = ({
                     transform="rotate(-90 60 60)"
                   />
                 </svg>
-                <span className="percent">
-                  {Math.floor(displayProgress)}%
-                </span>
+                <span className="percent">{Math.floor(displayProgress)}%</span>
               </div>
             </>
           ) : (
