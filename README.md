@@ -1,3 +1,44 @@
+# 🎮 Tiny Tumble
+
+**Tiny Tumble** is a small 3D platformer game built for the web.  
+The goal is to jump across platforms, avoid falling, and complete all levels.  
+It focuses on smooth movement, simple controls, and a clean minimal environment.
+
+👉 Play here: https://tiny-tumble.vercel.app/
+
+---
+
+## 🕹️ Player Controls
+
+**Keyboard Controls:**
+
+- **W / A / S / D** → Move the player  
+- **Shift** → Run  
+- **Space** → Jump  
+
+---
+
+## 🖼️ Screenshots
+
+
+![Gameplay Screenshot 1](./screenshots/screen1.png)
+![Gameplay Screenshot 2](./screenshots/screen2.png)
+![Gameplay Screenshot 3](./screenshots/screen3.png)
+
+---
+
+## 🛠️ Built With
+
+- React  
+- React Three Fiber (R3F)  
+- Three.js  
+- Rapier Physics  
+- Vercel (Deployment)
+
+---
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
