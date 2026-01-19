@@ -1,7 +1,7 @@
 import { useProgress } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
 import "./interface.css";
-import { audio } from "../audio";
+import { audio } from "../game/systems/audio";
 
 export const Interface = ({ started, gameFinished, onPlay, onRestart }) => {
   const { progress, active } = useProgress();
@@ -75,8 +75,10 @@ export const Interface = ({ started, gameFinished, onPlay, onRestart }) => {
               <h1 className="loading-title">Tiny Tumble</h1>
               <div className="loader-container">
                 {/* Progress Text inside the circle */}
-                <span className="percent-text">{Math.floor(displayProgress)}%</span>
-                
+                <span className="percent-text">
+                  {Math.floor(displayProgress)}%
+                </span>
+
                 <svg width="120" height="120" className="loader-svg">
                   <circle
                     cx="60"
@@ -128,7 +130,10 @@ export const Interface = ({ started, gameFinished, onPlay, onRestart }) => {
                 </div>
               </div>
 
-              <button className="credits-btn" onClick={() => setShowCredits(true)}>
+              <button
+                className="credits-btn"
+                onClick={() => setShowCredits(true)}
+              >
                 Credits
               </button>
             </div>
@@ -140,7 +145,10 @@ export const Interface = ({ started, gameFinished, onPlay, onRestart }) => {
             <button className="play-btn" onClick={handleRestart}>
               Restart
             </button>
-            <button className="credits-btn" onClick={() => setShowCredits(true)}>
+            <button
+              className="credits-btn"
+              onClick={() => setShowCredits(true)}
+            >
               Credits
             </button>
           </div>

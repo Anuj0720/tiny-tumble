@@ -70,6 +70,8 @@ export function Level4(props) {
     moveX(p5, dir5, speed5);
   });
   return (
+    
+    
     <group {...props} dispose={null}>
       <RigidBody
         ref={platformY}
@@ -285,6 +287,7 @@ export function Level4(props) {
         />
       </RigidBody>
     </group>
+   
   );
 }
 

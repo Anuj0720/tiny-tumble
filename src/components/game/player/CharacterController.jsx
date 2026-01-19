@@ -6,7 +6,7 @@ import { Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
 import { degToRad, MathUtils } from "three/src/math/MathUtils.js";
-import { audio } from "../audio";
+import { audio } from "../systems/audio";
 
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
@@ -49,7 +49,7 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
       halfHeight: { value: 0.29, min: 0.1, max: 1 },
       positionY: { value: -1, min: -10, max: 10 },
     },
-    { collapsed: true }
+    { collapsed: true },
   );
 
   const { cameraY, cameraZ } = useControls(
@@ -58,7 +58,7 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
       cameraY: { value: 4, min: 0, max: 10 },
       cameraZ: { value: -4, min: -10, max: 10 },
     },
-    { collapsed: true }
+    { collapsed: true },
   );
 
   const { cameraTargetZ } = useControls(
@@ -66,7 +66,7 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
     {
       cameraTargetZ: { value: 6.5, min: -10, max: 10 },
     },
-    { collapsed: true }
+    { collapsed: true },
   );
 
   const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED, JUMP_FORCE } = useControls(
@@ -81,7 +81,7 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
         step: degToRad(0.1),
       },
       JUMP_FORCE: { value: 6.5, min: 2, max: 12 },
-    }
+    },
   );
 
   const [, get] = useKeyboardControls();
@@ -128,14 +128,13 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
       jumpPressed &&
       canJump.current
       // &&Math.abs(vel.y) < 0.05
-
     ) {
       vel.y = JUMP_FORCE;
       canJump.current = false;
       setAnimation("jump_up");
-      
-      audio.jump.currentTime = 0
-      audio.jump.play()
+
+      audio.jump.currentTime = 0;
+      audio.jump.play();
     }
 
     prevJump.current = jump;
@@ -143,7 +142,7 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
     character.current.rotation.y = lerpAngle(
       character.current.rotation.y,
       characterRotationTarget.current,
-      0.1
+      0.1,
     );
 
     rb.current.setLinvel(vel, true);
@@ -158,7 +157,7 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
     container.current.rotation.y = MathUtils.lerp(
       container.current.rotation.y,
       rotationTarget.current,
-      0.1
+      0.1,
     );
 
     cameraPosition.current.getWorldPosition(cameraWorldPosition.current);
@@ -172,10 +171,7 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
   const respawn = () => {
     if (!rb.current) return;
 
-    rb.current.setTranslation(
-      { x: spawn[0], y: spawn[1], z: spawn[2] },
-      true
-    );
+    rb.current.setTranslation({ x: spawn[0], y: spawn[1], z: spawn[2] }, true);
 
     rb.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
     rb.current.setAngvel({ x: 0, y: 0, z: 0 }, true);
@@ -186,10 +182,7 @@ export const CharacterController = ({ spawn, onLevelEnd }) => {
   useEffect(() => {
     if (!rb.current) return;
 
-    rb.current.setTranslation(
-      { x: spawn[0], y: spawn[1], z: spawn[2] },
-      true
-    );
+    rb.current.setTranslation({ x: spawn[0], y: spawn[1], z: spawn[2] }, true);
 
     rb.current.setLinvel({ x: 0, y: 0, z: 0 }, true);
     rb.current.setAngvel({ x: 0, y: 0, z: 0 }, true);

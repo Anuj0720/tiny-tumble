@@ -2,14 +2,14 @@ import { Environment } from "@react-three/drei";
 import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
 import { useState } from "react";
 
-import { CharacterController } from "./CharacterController";
-import { Level1 } from "./Level1";
-import { Level2 } from "./Level2";
-import { Level3 } from "./Level3";
-import { Level4 } from "./Level4";
+import { CharacterController } from "./player/CharacterController";
+import { Level1 } from "./levels/Level1";
+import { Level2 } from "./levels/Level2";
+import { Level3 } from "./levels/Level3";
+import { Level4 } from "./levels/Level4";
 
-import { Clouds } from "./Cloud";
-import { SkyGradient } from "./SkyGradient";
+import { Clouds } from "../scene/environment/Cloud";
+import { SkyGradient } from "../scene/environment/SkyGradient";
 
 const LEVELS = [
   { Component: Level1, spawn: [0, 2, 0] },
@@ -43,6 +43,17 @@ export const Experience = ({ onGameFinished }) => {
 
       {/*  ATMOSPHERIC FOG */}
       <fog attach="fog" args={["#7d9ac9", 0.1, 50]} />
+
+      {/* Post Processing on level4
+       {levelIndex === 3 && !gameFinished && (
+      <EffectComposer>
+        <Glitch
+          delay={[1.5, 3.5]}
+          duration={[0.3, 0.6]}
+          strength={[0.2, 0.4]}
+        />
+      </EffectComposer>
+    )} */}
 
       <Physics>
         {!gameFinished && (

@@ -3,8 +3,8 @@ import { Suspense, useState } from "react";
 import { KeyboardControls } from "@react-three/drei";
 import { Leva } from "leva";
 
-import { Experience } from "./components/Experience";
-import { Interface } from "./components/Interface";
+import { Experience } from "./components/game/Experience.jsx";
+import { Interface } from "./components/ui/Interface.jsx";
 
 const keyMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
