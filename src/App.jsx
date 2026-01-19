@@ -5,6 +5,7 @@ import { Leva } from "leva";
 
 import { Experience } from "./components/game/Experience.jsx";
 import { Interface } from "./components/ui/Interface.jsx";
+import { Analytics } from "@vercel/analytics/react";
 
 const keyMap = [
   { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -22,6 +23,7 @@ export default function App() {
 
   return (
     <>
+     <Analytics />
       <Leva hidden/>
 
       <Interface
