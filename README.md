@@ -20,7 +20,7 @@ It focuses on smooth movement, simple controls, and a clean minimal environment.
 
 ## 🖼️ Screenshots
 
-
+![Gameplay Screenshot 1](./screenshots/game.png)
 ![Gameplay Screenshot 2](./screenshots/screen2.png)
 ![Gameplay Screenshot 3](./screenshots/screen3.png)
 
