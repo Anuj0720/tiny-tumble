@@ -10,6 +10,7 @@ import { Level4 } from "./levels/Level4";
 
 import { Clouds } from "../scene/environment/Cloud";
 import { SkyGradient } from "../scene/environment/SkyGradient";
+import { useControls } from "leva";
 
 const LEVELS = [
   { Component: Level1, spawn: [0, 2, 0] },
@@ -19,6 +20,11 @@ const LEVELS = [
 ];
 
 export const Experience = ({ onGameFinished }) => {
+
+    /* ---------------- LEVA CONTROLS ---------------- */
+    const {gravityY} = useControls("Gravity", {
+      gravityY: {value: -9.8, min: -9.8, max: 10}
+    })
   const [levelIndex, setLevelIndex] = useState(0);
   const [gameFinished, setGameFinished] = useState(false);
 
@@ -55,7 +61,7 @@ export const Experience = ({ onGameFinished }) => {
       </EffectComposer>
     )} */}
 
-      <Physics>
+      <Physics gravity={[0, gravityY, 0]}>
         {!gameFinished && (
           <>
             {/* PLAYER */}
